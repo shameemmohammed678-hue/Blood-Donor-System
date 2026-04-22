@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Update Availability{% endblock %}
+
+{% block content %}
+<div class="container col-md-6 mt-5">
+
+    <h2 class="text-center text-danger mb-4">Update Availability</h2>
+
+    <form id="availabilityForm" class="card p-4 shadow">
+
+        <div class="mb-3">
+            <label class="form-label">Select Status</label>
+            <select class="form-select" id="status">
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="updateStatus()" class="btn btn-danger w-100">
+            Update Status
+        </button>
+
+        <p id="msg" class="mt-3 text-center fw-bold"></p>
+
+    </form>
+</div>
+
+<script>
+function updateStatus() {
+    const donor_id = localStorage.getItem("donor_id");
+    const status = document.getElementById("status").value;
+
+    fetch("/donor/update_availability", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ donor_id, status })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("msg").innerText = data.message || data.error;
+        document.getElementById("msg").style.color = data.error ? "red" : "green";
+    });
+}
+</script>
+
+{% endblock %}

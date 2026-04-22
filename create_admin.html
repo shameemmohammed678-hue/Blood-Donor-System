@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="create-admin-wrapper">
+    <div class="create-admin-card">
+
+        <h2>Create New Admin</h2>
+
+        <form method="POST">
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <select name="role">
+                <option value="admin">Admin</option>
+                <option value="super_admin">Super Admin</option>
+            </select>
+
+            <button type="submit" class="create-admin-btn">
+                Create Admin
+            </button>
+        </form>
+
+        <a href="{{ url_for('admin.admin_dashboard') }}" class="back-dashboard">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

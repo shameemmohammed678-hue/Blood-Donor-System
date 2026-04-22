@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency Request{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+
+        <h3 class="text-center text-danger fw-bold mb-3">Send Emergency Request</h3>
+
+        <form id="emergencyForm">
+
+            <div class="mb-3">
+                <label class="form-label">Required Blood Group:</label>
+                <select id="required_blood_group" class="form-control">
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>AB+</option><option>AB-</option>
+                    <option>O+</option><option>O-</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Donor ID:</label>
+                <input type="number" id="donor_id" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Message:</label>
+                <textarea id="message" class="form-control"></textarea>
+            </div>
+
+            <button type="button" onclick="sendEmergency()" class="btn btn-danger w-100">
+                🚨 Send Request
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+function sendEmergency() {
+    const data = {
+        hospital_id: localStorage.getItem("hospital_id"),
+        donor_id: document.getElementById("donor_id").value,
+        required_blood_group: document.getElementById("required_blood_group").value,
+        message: document.getElementById("message").value
+    };
+
+    fetch("/hospital/send_request", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if(res.message){
+            alert(res.message);
+        }else if(res.error){
+            alert(res.error);
+        }else{
+            ("Request sent,but no response message");
+        }
+    });
+}
+</script>
+
+{% endblock %}

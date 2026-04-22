@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Login{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg">
+                <h2 class="text-center text-primary mb-4">Hospital Login</h2>
+
+                <form id="hospitalLoginForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+
+                    <button type="button" onclick="hospitalLogin()" class="btn btn-primary w-100">
+                        Login
+                    </button>
+
+                </form>
+
+                <p class="mt-3 text-center">
+                    New Hospital?
+                    <a href="{{ url_for('hospital.hospital_register_page') }}">Register Here</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function hospitalLogin() {
+
+    const data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+    };
+
+    fetch("/hospital/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        alert(result.message || result.error);
+
+        if (result.hospital_id) {
+            window.location.href = "/hospital/dashboard_page";
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+</script>
+
+{% endblock %}

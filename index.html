@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Blood Donor Finder And Emergency Request System{% endblock %}
+
+{% block content %}
+<div class="home-wrapper">
+    <div class="home-container">
+
+        <h1 class="home-title">Blood Donor Finder & Emergency Request System</h1>
+        <p class="home-subtitle">
+            Connecting donors and hospitals instantly during emergencies.
+        </p>
+
+        <div class="portal-grid">
+
+            <!-- Donor Card -->
+            <div class="portal-card portal-donor">
+                <h3>❤️ Donor Portal</h3>
+                <p>Register yourself and help save lives by donating blood.</p>
+                <a href="/donor/login" class="portal-btn">Enter as Donor</a>
+            </div>
+
+            <!-- Hospital Card -->
+            <div class="portal-card portal-hospital">
+                <h3>🏥 Hospital Portal</h3>
+                <p>Find blood donors and send emergency requests instantly.</p>
+                <a href="/hospital/login" class="portal-btn">Enter as Hospital</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

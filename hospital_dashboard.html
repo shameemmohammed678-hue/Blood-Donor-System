@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- Page Title -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-danger">Hospital Dashboard</h2>
+        <p class="text-muted">Manage donors and emergency blood requests</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row justify-content-center g-4">
+
+        <!-- Search Donors -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Search Donors</h5>
+                    <p class="card-text text-muted">
+                        Find blood donors based on blood group and location
+                    </p>
+                    <a href="/hospital/search_page" class="btn btn-outline-danger w-100">
+                        Search Donors
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Send Emergency Request -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Emergency Request</h5>
+                    <p class="card-text text-muted">
+                        Send emergency blood requests to matching donors.
+                    </p>
+                    <a href="/hospital/emergency_request_page" class="btn btn-outline-danger w-100">
+                        Send Request
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Request Status -->
+       <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">View Request Status</h5>
+                    <p class="card-text text-muted">
+                        Monitor the status of your emergency requests
+                    </p>
+                    <a href="/hospital/view_status_page" class="btn btn-outline-danger w-100">
+                        View Status
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <!-- Logout -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <a href="{{ url_for('hospital.hospital_logout') }}"
+               class="btn btn-secondary w-100">
+                Logout
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

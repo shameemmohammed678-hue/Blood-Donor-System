@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Registration{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg">
+
+                <h2 class="text-center text-primary mb-4">Hospital Registration</h2>
+
+                <form id="hospitalRegisterForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Hospital Name:</label>
+                        <input type="text" class="form-control" id="hospital_name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone:</label>
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address:</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+
+                    <button type="button" class="btn btn-primary w-100" onclick="registerHospital()">
+                        Register
+                    </button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function registerHospital() {
+
+    const data = {
+        hospital_name: document.getElementById("hospital_name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value   // FIXED
+    };
+
+    fetch("/hospital/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        console.log(result);
+        alert(result.message);    
+
+        if (result.message === "Hospital Registered Successfully") {
+            window.location.href = "/hospital/login_page";
+        }
+    })
+    .catch(err => {
+        alert("Error: " + err);
+    });
+}
+</script>
+
+{% endblock %}

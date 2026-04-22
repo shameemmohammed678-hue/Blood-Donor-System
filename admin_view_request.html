@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h4>Emergency Requests</h4>
+
+  <table class="table table-bordered mt-3">
+    <tr>
+      <th>Hospital</th><th>Donor</th><th>Blood Group</th><th>Status</th>
+    </tr>
+    {% for r in requests %}
+    <tr>
+      <td>{{ r.H_name }}</td>
+      <td>{{ r.D_name }}</td>
+      <td>{{ r.required_blood_group }}</td>
+      <td>{{ r.status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Login{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow p-4">
+                <h2 class="text-center text-danger mb-4">Donor Login</h2>
+
+                <form id="loginForm">
+                    <label>Email:</label>
+                    <input type="email" id="email" class="form-control mb-3">
+
+                    <label>Password:</label>
+                    <input type="password" id="password" class="form-control mb-3">
+
+                    <button type="button" class="btn btn-danger w-100" onclick="donorLogin()">Login</button>
+                </form>
+
+                <p class="mt-3 text-center">
+                    New Donor? 
+                    <a href="{{ url_for('donor.donor_register_page') }}">Register Here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function donorLogin() {
+    const data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    fetch("/donor/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        if (result.message) {
+            alert("Login Successful!");
+            window.location.href = "/donor/home";
+        } else {
+            alert(result.error);
+        }
+    });
+}
+</script>
+
+{% endblock %}

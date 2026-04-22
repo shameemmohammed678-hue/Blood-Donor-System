@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-danger">Donor Dashboard</h2>
+        <p class="text-muted">Manage emergency requests and availability</p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+
+        <!-- View Emergency Requests -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Emergency Requests</h5>
+                    <p class="card-text text-muted">
+                        View and respond to blood requests from hospitals.
+                    </p>
+                    <a href="/donor/view_request_page" class="btn btn-outline-danger w-100">
+                        View Requests
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Availability -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Availability Status</h5>
+                    <p class="card-text text-muted">
+                        Update your availability to recieve
+                        emergency requests
+                    </p>
+                    <a href="/donor/update_page" class="btn btn-outline-danger w-100">
+                        Update Availability
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <a href="{{ url_for('donor.donor_logout') }}"
+               class="btn btn-secondary w-100">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    </div>
+</div>
+{% endblock %}
