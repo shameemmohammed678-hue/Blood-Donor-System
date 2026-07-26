@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Requests{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Emergency Requests</h2>
+
+<div class="container">
+
+    <!-- Where requests will load -->
+    <div id="requestContainer">
+        <div class="alert alert-info text-center">
+            Loading requests...
+        </div>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const donorId = {{ donor_id | tojson }};  // Coming from backend safely
+
+    // Load all requests for this donor
+    fetch("/donor/view_requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ donor_id: donorId })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        const container = document.getElementById("requestContainer");
+        container.innerHTML = "";
+
+        if (!data.requests || data.requests.length === 0) {
+            container.innerHTML = `
+                <div class="alert alert-info text-center">
+                    No emergency requests at the moment.
+                </div>`;
+            return;
+        }
+
+        data.requests.forEach(req => {
+
+            let statusBadge = "";
+            if (req.status === "Pending") {
+                statusBadge = `<span class="badge bg-warning">Pending</span>`;
+            } else if (req.status === "Accepted") {
+                statusBadge = `<span class="badge bg-success">Accepted</span>`;
+            } else {
+                statusBadge = `<span class="badge bg-danger">Rejected</span>`;
+            }
+
+            // Create the card
+            let card = `
+                <div class="card shadow-sm p-3 mb-3">
+
+                    <h5><strong>Hospital:</strong> ${req.hospital_name}</h5>
+                    <p><strong>Phone:</strong> ${req.hospital_phone}</p>
+
+                    <p><strong>Required Blood Group:</strong>
+                        <span class="badge bg-danger">${req.required_blood_group}</span>
+                    </p>
+
+                    <p><strong>Message:</strong> ${req.request_message}</p>
+
+                    <p><strong>Status:</strong> ${statusBadge}</p>
+            `;
+
+            // Show Accept / Reject buttons ONLY if Pending
+            if (req.status === "Pending") {
+                card += `
+                    <div class="d-flex gap-2 mt-3">
+
+                        <button class="btn btn-success w-50"
+                            onclick="respondRequest(${req.request_id}, 'Accepted')">
+                            Accept
+                        </button>
+
+                        <button class="btn btn-danger w-50"
+                            onclick="respondRequest(${req.request_id}, 'Rejected')">
+                            Reject
+                        </button>
+
+                    </div>
+                `;
+            }
+
+            card += `</div>`; // close card
+            container.innerHTML += card;
+        });
+
+    })
+    .catch(err => {
+        console.error(err);
+        document.getElementById("requestContainer").innerHTML = `
+            <div class="alert alert-danger text-center">
+                Error loading requests.
+            </div>`;
+    });
+
+});
+
+
+// Function to Accept / Reject
+function respondRequest(requestId, responseText) {
+
+    fetch("/donor/respond_request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            request_id: requestId,
+            response: responseText
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();  // refresh to update status
+    })
+    .catch(err => console.error(err));
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Donor Registration{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg">
+
+                <h2 class="text-center text-danger fw-bold mb-4">Donor Registration</h2>
+
+                <form id="registerForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone:</label>
+                        <input type="text" class="form-control" id="phone" value="+91">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Age:</label>
+                        <input type="number" class="form-control" id="age">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender:</label>
+                        <select class="form-control" id="gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Blood Group:</label>
+                        <select class="form-control" id="blood_group">
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Location:</label>
+                        <input type="text" class="form-control" id="location">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address:</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+
+                    <button type="button" class="btn btn-danger w-100" onclick="registerDonor()">
+                        Register
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const phoneinput = document.getElementById("phone");
+phoneinput.addEventListener("input",()=>{
+    if(!phoneinput.value.startsWith("+91")){
+        phoneinput.value = "+91";
+    }
+    if(phoneinput.value.length>13){
+        phoneinput.value = phoneinput.value.slice(0,13);
+    }
+});
+function registerDonor() {
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        phone: document.getElementById("phone").value,
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        blood_group: document.getElementById("blood_group").value,
+        location: document.getElementById("location").value,
+        address: document.getElementById("address").value
+    };
+
+    fetch("/donor/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        if (result.message) {
+            alert("Registration Successful!");
+            window.location.href = "/donor/login";
+        } else {
+            alert(result.error);
+        }
+    });
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-4">Admin Dashboard</h2>
+    <p class="text-center text-muted mb-5">
+        Manage donors, hospitals, and emergency requests
+    </p>
+
+    <div class="row justify-content-center g-4">
+
+        <!-- View Donors -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title ">View Donors</h5>
+                    <p class="card-text text-muted">
+                        See all registered blood donors.
+                    </p>
+                    <a href="{{ url_for('admin.view_donors') }}"
+                       class="btn btn-outline-danger w-100">
+                        View Donors
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Hospitals -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title ">View Hospitals</h5>
+                    <p class="card-text text-muted">
+                        See all registered hospitals.
+                    </p>
+                    <a href="{{ url_for('admin.view_hospitals') }}"
+                       class="btn btn-outline-danger w-100">
+                        View Hospitals
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Requests -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Emergency Requests</h5>
+                    <p class="card-text text-muted">
+                        Monitor all blood requests.
+                    </p>
+                    <a href="{{ url_for('admin.view_requests') }}"
+                       class="btn btn-outline-danger w-100">
+                        View Requests
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Admin (ONLY for Super Admin) -->
+        {% if session.get('role') == 'super_admin' %}
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Create Admin</h5>
+                    <p class="card-text text-muted">
+                        Add a new administrator to manage the system.
+                    </p>
+                    <a href="{{ url_for('admin.create_admin') }}"
+                       class="btn btn-outline-danger w-100">
+                        Create Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        
+
+        <!-- View Admin (ONLY for Super Admin) -->
+        {% if session.get('role') == 'super_admin' %}
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Admins</h5>
+                    <p class="card-text text-muted">
+                        View and remove exististing administrators.
+                    </p>
+                    <a href="{{ url_for('admin.view_admins') }}"
+                       class="btn btn-outline-danger w-100">
+                        Manage Admins
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        
+    </div>
+
+
+    <!-- Logout -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <a href="{{ url_for('admin.admin_logout') }}"
+               class="btn btn-secondary w-100">
+                Logout
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
