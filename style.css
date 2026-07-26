@@ -1,0 +1,572 @@
+/* ==================================================
+   GOOGLE FONT
+================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* ==================================================
+   GLOBAL RESET
+================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.25s ease-in-out;
+}
+
+body {
+    background: linear-gradient(135deg, #d2f4fa, #ffffff);
+    min-height: 100vh;
+}
+
+/* ==================================================
+   NAVBAR
+================================================== */
+.navbar {
+    background: linear-gradient(135deg,#e91628,#da7f08);
+    padding: 15px 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.navbar a:hover {
+    opacity: 0.85;
+}
+
+/* ==================================================
+   HERO SECTION
+================================================== */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #1d3557;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 35px;
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+.btn {
+    padding: 12px 35px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 8px;
+}
+
+.btn-donor {
+    background: linear-gradient(135deg, #ff4d6d, #d62828);
+    color: white;
+}
+
+.btn-donor:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(214, 40, 40, 0.3);
+}
+
+.btn-hospital {
+    background: linear-gradient(135deg, #1e90ff, #4361ee);
+    color: white;
+}
+
+.btn-hospital:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+}
+
+.btn-admin {
+    background: linear-gradient(135deg, #6a4c93, #9d4edd);
+    color: white;
+}
+
+.btn-admin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(157, 78, 221, 0.3);
+}
+
+/* ==================================================
+   CARD DESIGN
+================================================== */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.dashboard-container {
+    padding: 40px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* ==================================================
+   FORM DESIGN
+================================================== */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.form-card {
+    background: white;
+    padding: 40px;
+    width: 420px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1d3557;
+}
+
+.form-card label {
+    font-weight: 500;
+    margin-top: 15px;
+    display: block;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+    border-color: #4361ee;
+    outline: none;
+}
+
+/* ==================================================
+   TABLE DESIGN
+================================================== */
+.table-container {
+    padding: 40px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.styled-table th {
+    background: #ae00da;
+    color: white;
+    padding: 12px;
+}
+
+.styled-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.styled-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* ==================================================
+   DELETE BUTTON
+================================================== */
+.delete-btn {
+    background: #e63946;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    background: #c1121f;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #f1f1f1;
+    color: #666;
+    margin-top: 40px;
+    background: linear-gradient(red,orange);
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .form-card {
+        width: 90%;
+    }
+
+    .dashboard-container {
+        padding: 20px;
+    }
+}
+
+
+/* ================= HOME SECTION ================= */
+
+.home-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f8fbff, #e9f1ff);
+    padding: 40px;
+}
+
+.home-container {
+    text-align: center;
+    max-width: 1000px;
+}
+
+.home-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1d3557;
+}
+
+.home-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+.portal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.portal-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.portal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.portal-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.portal-card p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Donor Theme */
+.portal-donor h3 {
+    color: #e63946;
+}
+
+.portal-donor .portal-btn {
+    background: linear-gradient(135deg, #ff4d6d, #d62828);
+}
+
+/* Hospital Theme */
+.portal-hospital h3 {
+    color: #1d4ed8;
+}
+
+.portal-hospital .portal-btn {
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+}
+
+.portal-btn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.portal-btn:hover {
+    opacity: 0.9;
+}
+
+/* ================= ADMIN LOGIN ================= */
+
+.admin-login-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+}
+
+.admin-login-card {
+    background: white;
+    padding: 40px;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.admin-login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
+
+.admin-login-card h2 {
+    color: #6b21a8;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.admin-login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.admin-login-card input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 5px rgba(139,92,246,0.4);
+}
+
+.admin-login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #a855f7, #6b21a8);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.admin-login-btn:hover {
+    opacity: 0.9;
+}
+
+/* ================= CREATE ADMIN ================= */
+
+.create-admin-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+}
+
+.create-admin-card {
+    background: white;
+    width: 420px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.create-admin-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.create-admin-card h2 {
+    color: #6b21a8;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.create-admin-card input,
+.create-admin-card select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.create-admin-card input:focus,
+.create-admin-card select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 6px rgba(139,92,246,0.4);
+}
+
+.create-admin-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #a855f7, #6b21a8);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.create-admin-btn:hover {
+    opacity: 0.9;
+}
+
+.back-dashboard {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #6b21a8;
+    font-size: 14px;
+}
+
+/* ===== Manage Admin Page ===== */
+
+.manage-admin-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.manage-admin-card {
+    width: 85%;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.manage-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.manage-admin-header h2 {
+    color: #6b21a8;
+}
+
+.back-btn {
+    background: #ede9fe;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #6b21a8;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #d8b4fe;
+}
+
+.role-badge {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.role-badge.admin {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.role-badge.super_admin {
+    background: #ede9fe;
+    color: #6b21a8;
+}
+
+.current-user {
+    color: gray;
+    font-weight: 500;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+footer {
+    background: linear-gradient(90deg, #c31432, #eb9019) !important;
+    color: white !important;
+    text-align: center;
+    padding: 15px 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+

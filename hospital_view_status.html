@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Emergency Request Status{% endblock %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Request ID</th>
+      <th>Donor Name</th>
+      <th>Blood Group</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody id="statusTableBody">
+    <tr><td colspan="6" class="text-center">Loading...</td></tr>
+  </tbody>
+</table>
+
+<!-- put this in hospital_view_status.html inside the content block, below the container element -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // make a POST to the hospital route. We don't need to send hospital_id if backend uses session.
+  fetch("/hospital/view_status", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({})   // body can be empty because server reads session
+  })
+  .then(response => {
+    if (!response.ok) {
+      // show error in UI, but also print status for debugging
+      console.error("fetch /hospital/view_status returned", response.status, response.statusText);
+      throw new Error("Network response not OK");
+    }
+    return response.json();
+  })
+  .then(data => {
+    const container = document.getElementById("statusTableBody"); // create this element in template
+    if (!container) {
+      console.error("No #statusTableBody element found in template");
+      return;
+    }
+
+    container.innerHTML = ""; // clear
+
+    if (!data.requests || data.requests.length === 0) {
+      container.innerHTML = `<tr><td colspan="6" class="text-center">No requests found</td></tr>`;
+      return;
+    }
+
+    data.requests.forEach(req => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${req.request_id ?? ''}</td>
+        <td>${req.donor_name ?? ''}</td>
+        <td>${req.blood_group ?? ''}</td>
+        <td>${req.status ?? ''}</td>
+        <td>${req.created_at ?? ''}</td>
+        <td>${req.donor_phone ?? ''}</td>
+      `;
+      container.appendChild(tr);
+    });
+  })
+  .catch(err => {
+    console.error("Error loading hospital requests:", err);
+    const container = document.getElementById("statusTableBody");
+    if (container) container.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error loading requests</td></tr>`;
+  });
+});
+</script>
+{% endblock %}

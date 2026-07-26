@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}View Hospitals{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">Registered Hospitals</h2>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} text-center">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if hospitals|length == 0 %}
+        <div class="alert alert-info text-center">
+            No hospitals found.
+        </div>
+    {% else %}
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-danger text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Hospital Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for hospital in hospitals %}
+                <tr>
+                    <td class="text-center">{{ hospital.hospital_id }}</td>
+                    <td>{{ hospital.H_name }}</td>
+                    <td>{{ hospital.email }}</td>
+                    <td>{{ hospital.phone }}</td>
+                    <td>{{ hospital.address }}</td>
+
+                    <td class="text-center">
+                        <a href="{{ url_for('admin.delete_hospital', hospital_id=hospital.hospital_id) }}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this hospital?');">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
