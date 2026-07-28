@@ -1,14 +1,19 @@
+import os
 import pymysql
 from config import Config
 
 def get_connection():
     try:
         connection = pymysql.connect(
-            host = Config.MYSQL_HOST,
-            user= Config.MYSQL_USER,
-            password = Config.MYSQL_PASSWORD,
-            database= Config.MYSQL_DB,
-            cursorclass = pymysql.cursors.DictCursor
+        host=Config.MYSQL_HOST,
+        port=4000,
+        user=Config.MYSQL_USER,
+        password=Config.MYSQL_PASSWORD,
+        database=Config.MYSQL_DB,
+        ssl={
+        "ca": os.path.join("certs", "isrgrootx1.pem")
+         },
+        cursorclass=pymysql.cursors.DictCursor
         )
         return connection
     except Exception as e:
