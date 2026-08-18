@@ -1,126 +1,264 @@
 # 🩸 Blood Donor Finder and Emergency Request System
 
-## 📌 Project Description
-The Blood Donor Finder and Emergency Request System is a web-based application developed to connect blood donors and hospitals during emergency situations. The system helps hospitals quickly find suitable donors and send emergency requests, reducing delays in critical medical situations.
+A full-stack web application designed to help hospitals quickly find suitable blood donors and send emergency blood requests during critical situations.
+
+## 📌 Project Overview
+
+The **Blood Donor Finder and Emergency Request System** connects donors, hospitals, and administrators through a centralized web platform. Hospitals can search for donors based on blood group and send emergency requests, while donors can manage their profiles and receive notifications.
+
+The application is built with **Python Flask**, uses **TiDB Cloud (MySQL-compatible)** for cloud database storage, and integrates the **Twilio SMS API** for donor notifications.
+
+## ✨ Features
+
+### 🩸 Donor
+
+* Donor registration and login
+* Manage donor profile
+* Search and view requests
+* Receive emergency request notifications
+
+### 🏥 Hospital
+
+* Hospital registration and login
+* Hospital dashboard
+* Search donors by blood group
+* Send emergency blood requests
+* View request status
+
+### 👨‍💼 Admin
+
+* Admin authentication
+* Manage donors
+* Manage hospitals
+* Manage administrators
+* Monitor emergency requests
+
+### 📱 Notifications
+
+* SMS notifications using Twilio API
+
+### 🔐 Security
+
+* Password hashing
+* Session management
+* Role-based access control
+* Input validation
+* Environment-based configuration for sensitive credentials
 
 ---
 
-## 🎯 Features
-- Donor Registration and Login
-- Hospital Login and Dashboard
-- Search Donors by Blood Group
-- Send Emergency Blood Requests
-- SMS Notification using Twilio
-- Admin Panel (Manage Donors, Hospitals, Admins)
-- Role-Based Access Control (Admin / Super Admin)
+## 🛠️ Technology Stack
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+
+### Backend
+
+* Python
+* Flask
+
+### Database
+
+* MySQL
+* TiDB Cloud
+* PyMySQL
+
+### APIs & Services
+
+* Twilio SMS API
+
+### Deployment & Tools
+
+* Vercel
+* Git
+* GitHub
 
 ---
 
-## 🛠️ Technologies Used
+## 🔄 System Workflow
 
-### Frontend:
-- HTML
-- CSS
-- Bootstrap
-- JavaScript
-
-### Backend:
-- Python (Flask)
-
-### Database:
-- MySQL
-
-### API Integration:
-- Twilio SMS API
-
----
-
-## ⚙️ System Workflow
-1. Donor registers and provides details
-2. Hospital logs in and searches donors
-3. Hospital sends emergency request
-4. Donor receives SMS notification
-5. Admin monitors and manages the system
-
----
-
-## 🔐 Security Features
-- Password Hashing
-- Session Management
-- Role-Based Access Control
-- Input Validation
+```text
+Donor Registration
+        ↓
+Donor Profile
+        ↓
+Hospital Searches Donors
+        ↓
+Hospital Sends Emergency Request
+        ↓
+Request Stored in Cloud Database
+        ↓
+Twilio SMS Notification
+        ↓
+Donor Receives Emergency Request
+```
 
 ---
 
 ## 📁 Project Structure
 
-project/
+```text
+Blood-Donor-System/
 │
-├── static/
-│ ├── css/
-│ ├── js/
-│ └── images/
+├── api/
+│   └── index.py
 │
-├── templates/
-│ ├── donor/
-│ ├── hospital/
-│ └── admin/
+├── certs/
+│   └── isrgrootx1.pem
 │
 ├── database/
+│   └── db_connection.py
+│
+├── routes/
+│   ├── admin_routes.py
+│   ├── donor_routes.py
+│   └── hospital_routes.py
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── templates/
+│   ├── donor/
+│   ├── hospital/
+│   └── admin/
 │
 ├── app.py
+├── config.py
 ├── requirements.txt
+├── twilio_config.py
+├── vercel.json
+├── .env
 └── README.md
+```
 
-
+> **Note:** `.env` contains sensitive credentials and should not be committed to GitHub.
 
 ---
 
-## 🚀 How to Run the Project
+## ⚙️ Environment Variables
 
-1. Clone the repository:
-git clone https://github.com/your-username/blood-donor-system.git
+Create a `.env` file in the project root and configure the required environment variables:
 
-2. Navigate to project folder:
-cd blood-donor-system
+```env
+SECRET_KEY=your_secret_key
 
+MYSQL_HOST=your_database_host
+MYSQL_USER=your_database_user
+MYSQL_PASSWORD=your_database_password
+MYSQL_DB=your_database_name
 
-3. Install dependencies:
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
+```
+
+Keep all credentials private and never expose them publicly.
+
+---
+
+## 🚀 Local Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/shameemmohammed678-hue/Blood-Donor-System.git
+```
+
+### 2. Navigate to the project directory
+
+```bash
+cd Blood-Donor-System
+```
+
+### 3. Create and activate a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+### 5. Configure environment variables
 
-4. Run the application:
+Create a `.env` file and add the required database, Flask, and Twilio credentials.
+
+### 6. Run the application
+
+```bash
 python app.py
+```
 
+### 7. Open in your browser
 
-5. Open browser:
+```text
 http://127.0.0.1:5000
-
-
----
-
-## ⚠️ Important Note
-Sensitive information such as API keys, database credentials, and secret tokens are removed for security purposes.
+```
 
 ---
 
-## 📈 Future Enhancements
-- Forgot Password Feature
-- Email Notification System
-- GPS-Based Donor Search
-- Mobile Application Version
-- Cloud Deployment
+## ☁️ Deployment
+
+The application uses:
+
+* **Vercel** — Application deployment
+* **TiDB Cloud** — Cloud-hosted MySQL-compatible database
+* **GitHub** — Source code and version control
+* **Twilio** — SMS notification service
+
+Environment variables are configured separately in the deployment platform rather than storing sensitive credentials in the source code.
+
+---
+
+## 🔒 Security Practices
+
+* Passwords are securely hashed before storage.
+* Sensitive credentials are stored using environment variables.
+* Database communication uses SSL.
+* Role-based access control restricts administrative functionality.
+* User input is validated before processing.
+* `.env` files are excluded from version control.
+
+---
+
+## 🔮 Future Enhancements
+
+* Forgot password and password recovery
+* Email notification system
+* GPS/location-based donor search
+* Advanced donor availability filtering
+* Mobile application
+* Real-time request status updates
 
 ---
 
 ## 👨‍💻 Developed By
+
 **Mohammed Shameem J**
 
 ---
 
-## 📚 References
-- Flask Documentation
-- MySQL Documentation
-- Twilio API Documentation
-- MDN Web Docs
-- ChatGPT (GPT-5.3)
+## 📚 Technologies & Documentation
+
+* Flask
+* MySQL / TiDB Cloud
+* PyMySQL
+* Twilio API
+* Vercel
+* HTML, CSS & JavaScript
+* Git & GitHub
