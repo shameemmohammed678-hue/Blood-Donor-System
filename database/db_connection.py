@@ -2,10 +2,6 @@ import os
 import pymysql
 from config import Config
 
-import os
-import pymysql
-from config import Config
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def get_connection():
